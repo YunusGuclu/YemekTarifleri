@@ -1,0 +1,305 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yemek Tarifi Sitesi</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff !important;
+        }
+        .navbar {
+            background-color: #343a40 !important;
+        }
+        .jumbotron {
+            background: url('https://fotolifeakademi.com/uploads/2020/04/yemek-fotografi-cekimi-724x394.webp') no-repeat center center;
+            background-size: cover;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            padding: 6rem 2rem;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .card img {
+            max-height: 200px;
+            object-fit: cover;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: relative;
+            width: 100%;
+            clear: both;
+        }
+        .footer a {
+            color: #ffc107;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .card-text {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .btn-outline-primary, .btn-outline-success {
+            border-color: #ffc107;
+            color: #ffc107;
+        }
+        .btn-outline-primary:hover, .btn-outline-success:hover {
+            background-color: #ffc107;
+            color: #343a40;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #343a40;
+            padding-top: 60px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .sidebar a {
+            display: block;
+            color: #ffc107;
+            padding: 12px 16px;
+            text-decoration: none;
+            transition: 0.3s;
+            border-radius: 0 20px 20px 0;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .sidebar a:hover {
+            background-color: #ffc107;
+            color: #343a40;
+            transform: translateX(10px);
+        }
+        .sidebar a.active {
+            background-color: #ffc107;
+            color: #343a40;
+            transform: translateX(10px);
+        }
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+        }
+        .pagination .page-item .page-link {
+            color: #ffc107;
+            background-color: #343a40;
+            border-color: #343a40;
+        }
+        .pagination .page-item.active .page-link {
+            color: #343a40;
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+        .pagination .page-item .page-link:hover {
+            color: #343a40;
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+        .pagination {
+            justify-content: center;
+        }
+        .pagination .page-item {
+            margin: 0 2px;
+        }
+        .pagination .page-link {
+            padding: 0.5rem 0.75rem;
+        }
+        .footer .row {
+            justify-content: center;
+        }
+        .footer .col-lg-3 {
+            text-align: center;
+        }
+        .weather-container {
+            text-align: center;
+            background-color: #343a40; /* Background color of the weather section */
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: white; /* Text color to white */
+        }
+        .weather-container img {
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .navbar .form-inline {
+            margin-right: auto;
+            margin-left: 40px;
+        }
+        .navbar-nav.ml-auto {
+            margin-left: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'home' %}">Yemek Tarifi</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
+        <!-- Arama Çubuğu -->
+        <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'home' %}">
+            <input class="form-control mr-sm-2" type="search" placeholder="Tarif Ara..." aria-label="Search" name="q" value="{{ request.GET.q }}">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ara</button>
+        </form>
+    </div>
+    <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'hakkinda' %}">Hakkında</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">İletişim</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+  
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <a href="{% url 'home' %}" class="active">Ana Sayfa</a>
+    {% for kategori in kategoriler %}
+        <a href="{% url 'kategoridetay' kategori.slug %}">{{ kategori.name }}</a>
+    {% endfor %}
+</div>
+
+<!-- Main Content -->
+<div class="content">
+  <!-- Header -->
+  <header class="jumbotron text-center mb-4">
+    <h1 class="display-4">Hoşgeldiniz</h1>
+    <p class="lead">En lezzetli yemek tarifleri burada!</p>
+  </header>
+
+  <!-- Tarifler Section -->
+  <div class="container">
+    <h2 class="text-center mb-4">Popüler Tarifler</h2>
+    <div class="row" id="tarifler-container">
+      {% if tarifler %}
+          {% for tarif in tarifler %}
+              <div class="col-md-4 tarif-card">
+                  <div class="card mb-4 shadow-sm">
+                      <a href="{% url 'detay' tarif.slug %}" class="btn btn-outline-primary">
+                      <img src="{{ tarif.resim.url }}" class="card-img-top" alt="{{ tarif.ad }}"></a>
+                      <div class="card-body">
+                          <h5 class="card-title">{{ tarif.ad }}</h5>
+                          <p class="card-text">{{ tarif.aciklama }}</p>
+                          <a href="{% url 'detay' tarif.slug %}" class="btn btn-outline-primary">Detaylar</a>
+                      </div>
+                  </div>
+              </div>
+          {% endfor %}
+      {% else %}
+          <p class="text-center">Aramanızla eşleşen tarif bulunamadı.</p>
+      {% endif %}
+    </div>
+
+    <!-- Sayfalama -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center" id="pagination-container">
+            <!-- Sayfa numaraları buraya JavaScript ile eklenecek -->
+        </ul>
+    </nav>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container p-4">
+      <div class="row">
+        <div class="col-lg-12 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Yemek Tarifi Sitesi</h5>
+          <p>En lezzetli tarifler için bizi takip edin.</p>
+        </div>
+      </div>
+      <div class="weather-container">
+        <h5>Elazığ Hava Durumu</h5>
+        <p>
+            <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="Weather Icon">
+            {{ weather.city }}: {{ weather.temperature }}°C, {{ weather.description }}
+        </p>
+        <p>Rüzgar Hızı: {{ weather.wind_speed }} m/s</p>
+        <p>Nem: {{ weather.humidity }}%</p>
+        <p>Basınç: {{ weather.pressure }} hPa</p>
+      </div>
+      <div class="text-center p-3 bg-dark text-light">
+        © 2024 Yemek Tarifi Sitesi
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tarifler = document.querySelectorAll('.tarif-card');
+        const itemsPerPage = 12;
+        const paginationContainer = document.getElementById('pagination-container');
+        let currentPage = 1;
+
+        function displayTarifler(page) {
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            tarifler.forEach((tarif, index) => {
+                tarif.style.display = index >= startIndex && index < endIndex ? 'block' : 'none';
+            });
+        }
+
+        function setupPagination() {
+            const pageCount = Math.ceil(tarifler.length / itemsPerPage);
+            paginationContainer.innerHTML = '';
+
+            for (let i = 1; i <= pageCount; i++) {
+                const li = document.createElement('li');
+                li.classList.add('page-item');
+                if (i === currentPage) li.classList.add('active');
+                const a = document.createElement('a');
+                a.classList.add('page-link');
+                a.href = '#';
+                a.textContent = i;
+                a.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    currentPage = i;
+                    displayTarifler(currentPage);
+                    setupPagination();
+                });
+                li.appendChild(a);
+                paginationContainer.appendChild(li);
+            }
+        }
+
+        displayTarifler(currentPage);
+        setupPagination();
+    });
+</script>
+</body>
+</html>

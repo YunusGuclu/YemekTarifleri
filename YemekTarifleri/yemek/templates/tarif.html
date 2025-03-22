@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ tarif.ad }} - Yemek Tarifi Sitesi</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff !important;
+        }
+        .navbar {
+            background-color: #343a40 !important;
+        }
+        .content {
+            padding: 20px;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+        }
+        .footer a {
+            color: #ffc107;
+        }
+        .btn-outline-primary {
+            border-color: #ffc107;
+            color: #ffc107;
+        }
+        .btn-outline-primary:hover {
+            background-color: #ffc107;
+            color: #fff;
+        }
+        .jumbotron {
+            background: url('https://fotolifeakademi.com/uploads/2020/04/yemek-fotografi-cekimi-724x394.webp') no-repeat center center;
+            background-size: cover;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            padding: 6rem 2rem;
+        }
+        .footer .row {
+            justify-content: space-between;
+        }
+        .footer .col-lg-3 {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{% url 'home' %}">Yemek Tarifi</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'home' %}">Ana Sayfa</a>
+      </li>    
+      <li class="nav-item">
+        <a class="nav-link" href="#">Hakkında</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">İletişim</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="content">
+  <header class="jumbotron text-center mb-4">
+    <h1 class="display-4">{{ tarif.ad }}</h1>
+  </header>
+
+  <!-- Recipe Details -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{ yemek.resim.url }}" class="img-fluid" alt="{{ yemek.ad }}">
+      </div>
+      <div class="col-md-6">
+        <h2 class="mb-3">Tarif Detayları</h2>
+        <p><strong>Tarif:</strong> {{ yemek.aciklama }}</p>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="footer text-center text-lg-start">
+  <div class="container p-4">
+    <div class="row">
+      <div class="col-lg-12 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Yemek Tarifi Sitesi</h5>
+        <p>En lezzetli tarifler için bizi takip edin.</p>
+      </div>
+    </div>
+    <div class="text-center p-3 bg-dark text-light">
+      © 2024 Yemek Tarifi Sitesi
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

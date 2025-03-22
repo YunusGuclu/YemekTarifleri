@@ -1,0 +1,143 @@
+/* styles.css */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+.navbar-brand {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff !important;
+}
+.navbar {
+  background-color: #343a40 !important;
+}
+.navbar-nav {
+  margin-left: auto;
+}
+.jumbotron {
+  background: url('https://fotolifeakademi.com/uploads/2020/04/yemek-fotografi-cekimi-724x394.webp') no-repeat center center;
+  background-size: cover;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  padding: 6rem 2rem;
+}
+.card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+.card img {
+  max-height: 200px;
+  object-fit: cover;
+}
+.card:hover {
+  transform: scale(1.05);
+}
+.footer {
+  background-color: #343a40;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  clear: both;
+}
+.footer a {
+  color: #ffc107;
+}
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.card-text {
+  font-size: 0.9rem;
+  color: #666;
+}
+.btn-outline-primary {
+  border-color: #ffc107;
+  color: #ffc107;
+}
+.btn-outline-primary:hover {
+  background-color: #ffc107;
+  color: #fff;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  background-color: #343a40;
+  padding-top: 60px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.sidebar a {
+  display: block;
+  color: #ffc107;
+  padding: 12px 16px;
+  text-decoration: none;
+  transition: 0.3s;
+  border-radius: 0 20px 20px 0;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sidebar a:hover {
+  background-color: #ffc107;
+  color: #343a40;
+  transform: translateX(10px);
+}
+.sidebar a.active {
+  background-color: #ffc107;
+  color: #343a40;
+  transform: translateX(10px);
+}
+.content {
+  margin-left: 270px;
+  padding: 20px;
+}
+.pagination .page-item .page-link {
+  color: #ffc107;
+  background-color: #343a40;
+  border-color: #343a40;
+}
+.pagination .page-item.active .page-link {
+  color: #343a40;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+.pagination .page-item .page-link:hover {
+  color: #343a40;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+.pagination {
+  justify-content: center;
+}
+.pagination .page-item {
+  margin: 0 2px;
+}
+.pagination .page-link {
+  padding: 0.5rem 0.75rem;
+}
+.footer .row {
+  justify-content: center;
+}
+.footer .col-lg-3 {
+  text-align: center;
+}
+.weather-container {
+  text-align: center;
+  background-color: #343a40; /* Background color of the weather section */
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: white; /* Text color to white */
+}
+.weather-container img {
+  vertical-align: middle;
+  margin-right: 10px;
+}
